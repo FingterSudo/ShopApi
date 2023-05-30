@@ -10,7 +10,7 @@ namespace ShopApi.Services.OderServices
         public async Task<List<Order>> GetAllOrder()
         {
             return await _context.Orders.ToListAsync();
-        }
+        }  
         public async Task<Order> GetSingleOrder(int id)
         {
             var result = await _context.Orders.FindAsync(id);
