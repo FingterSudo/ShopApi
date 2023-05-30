@@ -26,7 +26,7 @@ public partial class ShopDatabaseContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<Supplier> Suppliers { get; set; }
-
+    public virtual DbSet<User> Users { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=DESKTOP-VC7AHN1; Database=ShopDatabase;Trusted_Connection=True;user= sa; password=1234$; TrustServerCertificate=True");
@@ -136,6 +136,21 @@ public partial class ShopDatabaseContext : DbContext
             entity.Property(e => e.Fax).HasMaxLength(30);
             entity.Property(e => e.Phone).HasMaxLength(30);
         });
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.ToTable("User");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.PasswordHash).HasMaxLength(2000);
+            entity.Property(e => e.PasswordSalt).HasMaxLength(2000);
+            entity.Property(e => e.RefreshToken).HasMaxLength(2000);
+            entity.Property(e => e.TokenCreated).HasColumnType("datetime");
+            entity.Property(e => e.TokenExpires).HasColumnType("datetime");
+            entity.Property(e => e.UserName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }

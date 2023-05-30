@@ -1,9 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\ShopApi",
-    "\\ShopApi\\Controllers"
+    ""
   ],
-  "SelectedNode": "\\ShopApi\\Controllers\\OrderItemController.cs",
   "PreviewInSolutionExplorer": false
 }
