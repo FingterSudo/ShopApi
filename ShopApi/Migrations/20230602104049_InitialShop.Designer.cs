@@ -12,8 +12,8 @@ using ShopApi.Data;
 namespace ShopApi.Migrations
 {
     [DbContext(typeof(ShopDatabaseContext))]
-    [Migration("20230530164357_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230602104049_InitialShop")]
+    partial class InitialShop
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -213,6 +213,42 @@ namespace ShopApi.Migrations
                     b.HasIndex(new[] { "CompanyName" }, "IndexSupplierName");
 
                     b.ToTable("Supplier", (string)null);
+                });
+
+            modelBuilder.Entity("ShopApi.Models.UserLogin", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("varbinary(2000)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("varbinary(2000)");
+
+                    b.Property<byte[]>("RefreshToken")
+                        .HasMaxLength(2000)
+                        .HasColumnType("varbinary(2000)");
+
+                    b.Property<DateTime?>("TokenCreated")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("TokenExpires")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_UserLogin");
+
+                    b.ToTable("UserLogin", (string)null);
                 });
 
             modelBuilder.Entity("ShopApi.Models.Order", b =>

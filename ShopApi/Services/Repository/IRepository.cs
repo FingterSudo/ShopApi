@@ -4,10 +4,13 @@ namespace ShopApi.Services.Repository;
 
 public interface IRepository
 {
-    Task<string> CreateToken(User user);
+    string CreateToken(UserLogin user);
+    Task<string> GenerationsToke();
     Task<string> RefreshToken();
     void SetRefreshToken();
-    enum Status{
+    Task<string> GetRefreshToken();
+    enum Status
+    {
         OK,
         NotFound,
         BadRequest

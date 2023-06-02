@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopApi.Models;
 using ShopApi.Services.CustomerServices;
@@ -14,7 +15,7 @@ namespace ShopApi.Controllers
         {
             _customerServices = customerServices;
         }
-        [HttpGet]
+        [HttpGet, Authorize(Roles ="Admin")]
         public async Task<ActionResult<List<Customer>>> GetAllCustomer()
         {
             return await _customerServices.GetAllCustomer();

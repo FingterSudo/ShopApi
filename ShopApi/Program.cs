@@ -5,7 +5,9 @@ using ShopApi.DTO;
 using ShopApi.Services.CustomerServices;
 using ShopApi.Services.OderServices;
 using ShopApi.Services.ProductServices;
+using ShopApi.Services.Repository;
 using ShopApi.Services.SupplierServices;
+using ShopApi.Services.UserLoginservices;
 using ShopApi.Services.UserServices;
 using System.Security.AccessControl;
 
@@ -25,11 +27,12 @@ builder.Services.AddDbContext<ShopDatabaseContext>(option =>
 });
 
 builder.Services.AddScoped<ICustomerServices, CustomerServices>();
-builder.Services.AddScoped<IProductServices, ProductServices>();    
+builder.Services.AddScoped<IProductServices, ProductServices>();
 builder.Services.AddScoped<ISupplierServices, SupplierServices>();
 builder.Services.AddScoped<IOrderServices, OrderSevices>();
 builder.Services.AddScoped<IUserServices, UserServices>();
-builder.Services.AddSingleton<IUserDTO, UserDTO>();
+builder.Services.AddScoped<IRepository, Repository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using ShopApi.Data;
 using ShopApi.DTO;
 using ShopApi.Models;
+using ShopApi.Services.UserServices;
 using System.Security.Cryptography;
 
-namespace ShopApi.Services.UserServices
+namespace ShopApi.Services.UserLoginservices
 {
     public class UserServices : IUserServices
     {
@@ -15,21 +16,21 @@ namespace ShopApi.Services.UserServices
             _context = context;
         }
 
-        public async Task<User> Register(IUserDTO userDTO)
+        public async Task<UserLogin> Register(UserDTO userDTO)
         {
-            User user = new User();
+            UserLogin user = new UserLogin();
             CreatePasswordHash(userDTO.Password, out byte[] passwordHash, out byte[] passwordSalt);
             user.UserName = userDTO.UserName;
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            _context.Users.Add(user);
+            _context.UserLogins.Add(user);
             await _context.SaveChangesAsync();
             return user;
         }
 
-        public async Task<string> Login(IUserDTO userDTO)
+        public async Task<string> Login(UserDTO userDTO)
         {
-            var user = await _context.Users.FindAsync(userDTO.UserName);
+            var user = await _context.UserLogins.FindAsync(userDTO.UserName);
             if (user is null)
             {
                 return nameof(Status.NotFound);
@@ -60,6 +61,11 @@ namespace ShopApi.Services.UserServices
             }
         }
 
+        public async Task<UserLogin> GetUserByUserDTO(UserDTO userDTO)
+        {
+            var user = await _context.UserLogins.FindAsync(userDTO.UserName);
+            return user;
+        }
         enum Status
         {
             OK,

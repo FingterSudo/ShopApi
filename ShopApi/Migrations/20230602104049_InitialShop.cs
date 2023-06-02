@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShopApi.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialShop : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,6 +45,23 @@ namespace ShopApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SUPPLIER", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserLogin",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    UserName = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
+                    PasswordHash = table.Column<byte[]>(type: "varbinary(2000)", maxLength: 2000, nullable: false),
+                    PasswordSalt = table.Column<byte[]>(type: "varbinary(2000)", maxLength: 2000, nullable: false),
+                    RefreshToken = table.Column<byte[]>(type: "varbinary(2000)", maxLength: 2000, nullable: true),
+                    TokenCreated = table.Column<DateTime>(type: "datetime", nullable: true),
+                    TokenExpires = table.Column<DateTime>(type: "datetime", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLogin", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,6 +184,9 @@ namespace ShopApi.Migrations
         {
             migrationBuilder.DropTable(
                 name: "OrderItem");
+
+            migrationBuilder.DropTable(
+                name: "UserLogin");
 
             migrationBuilder.DropTable(
                 name: "Order");

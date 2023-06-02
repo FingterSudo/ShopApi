@@ -5,8 +5,8 @@ namespace ShopApi.Services.LoginServices
 {
     public interface ILoginServices
     {
-        Task<User> Register(IUserDTO userDTO);
-        Task<string> Login(IUserDTO userDTO);
+        Task<UserLogin> Register(UserDTO userDTO);
+        Task<string> Login(UserDTO userDTO);
         Task<string> GetUserName();
     }
 }
