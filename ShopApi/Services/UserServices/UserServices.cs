@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ShopApi.Data;
 using ShopApi.DTO;
 using ShopApi.Models;
@@ -30,7 +31,7 @@ namespace ShopApi.Services.UserLoginservices
 
         public async Task<string> Login(UserDTO userDTO)
         {
-            var user = await _context.UserLogins.FindAsync(userDTO.UserName);
+            var user = await _context.UserLogins.FirstOrDefaultAsync(x => x.UserName == userDTO.UserName);
             if (user is null)
             {
                 return nameof(Status.NotFound);
@@ -63,7 +64,7 @@ namespace ShopApi.Services.UserLoginservices
 
         public async Task<UserLogin> GetUserByUserDTO(UserDTO userDTO)
         {
-            var user = await _context.UserLogins.FindAsync(userDTO.UserName);
+            var user = await _context.UserLogins.FirstOrDefaultAsync(x => x.UserName == userDTO.UserName);
             return user;
         }
         enum Status

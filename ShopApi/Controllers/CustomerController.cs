@@ -15,7 +15,7 @@ namespace ShopApi.Controllers
         {
             _customerServices = customerServices;
         }
-        [HttpGet, Authorize(Roles ="Admin")]
+        [HttpGet, Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<Customer>>> GetAllCustomer()
         {
             return await _customerServices.GetAllCustomer();

@@ -28,6 +28,8 @@ public partial class ShopDatabaseContext : DbContext
 
     public virtual DbSet<UserLogin> UserLogins { get; set; }
 
+    public virtual DbSet<UserRole> UserRoles { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=DESKTOP-VC7AHN1; Database=ShopDatabase;Trusted_Connection=True;user= sa; password=1234$; TrustServerCertificate=True");
@@ -152,6 +154,22 @@ public partial class ShopDatabaseContext : DbContext
             entity.Property(e => e.UserName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<UserRole>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_USERROLES");
+
+            entity.HasIndex(e => e.UserId, "IndexUserRolesUserId");
+
+            entity.Property(e => e.Roels)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.User).WithMany(p => p.UserRoles)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_USERROLES_REFERENCE_USERLOGINS");
         });
 
         OnModelCreatingPartial(modelBuilder);

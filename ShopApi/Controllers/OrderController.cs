@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShopApi.Models;
 using ShopApi.Services.OderServices;
@@ -15,7 +16,7 @@ namespace ShopApi.Controllers
         {
             _orderServices = orderServices;
         }
-        [HttpGet]
+        [HttpGet, Authorize()]
         public async Task<ActionResult<List<Order>?>> GetAllOrder()
         {
             return await _orderServices.GetAllOrder();

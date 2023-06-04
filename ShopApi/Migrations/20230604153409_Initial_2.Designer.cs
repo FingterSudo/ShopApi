@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopApi.Data;
 
@@ -11,9 +12,11 @@ using ShopApi.Data;
 namespace ShopApi.Migrations
 {
     [DbContext(typeof(ShopDatabaseContext))]
-    partial class ShopDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230604153409_Initial_2")]
+    partial class Initial_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -215,15 +218,16 @@ namespace ShopApi.Migrations
             modelBuilder.Entity("ShopApi.Models.UserLogin", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<byte[]>("PasswordHash")
-                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("varbinary(2000)");
 
                     b.Property<byte[]>("PasswordSalt")
-                        .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("varbinary(2000)");
 
@@ -243,9 +247,33 @@ namespace ShopApi.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("Id")
-                        .HasName("PK_UserLogin");
+                        .HasName("PK_USERLOGIN");
 
                     b.ToTable("UserLogin", (string)null);
+                });
+
+            modelBuilder.Entity("ShopApi.Models.UserRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Roels")
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id")
+                        .HasName("PK_USERROLES");
+
+                    b.HasIndex(new[] { "UserId" }, "IndexUserRolesUserId");
+
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("ShopApi.Models.Order", b =>
@@ -289,6 +317,17 @@ namespace ShopApi.Migrations
                     b.Navigation("Supplier");
                 });
 
+            modelBuilder.Entity("ShopApi.Models.UserRole", b =>
+                {
+                    b.HasOne("ShopApi.Models.UserLogin", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .IsRequired()
+                        .HasConstraintName("FK_USERROLES_REFERENCE_USERLOGINS");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ShopApi.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
@@ -307,6 +346,11 @@ namespace ShopApi.Migrations
             modelBuilder.Entity("ShopApi.Models.Supplier", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ShopApi.Models.UserLogin", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

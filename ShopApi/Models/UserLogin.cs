@@ -18,4 +18,6 @@ public partial class UserLogin
     public DateTime? TokenCreated { get; set; }
 
     public DateTime? TokenExpires { get; set; }
+
+    public virtual ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 }
