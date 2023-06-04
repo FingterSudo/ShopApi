@@ -9,7 +9,7 @@ public partial class UserRole
 
     public int UserId { get; set; }
 
-    public string? Roels { get; set; }
+    public string? Roles { get; set; }
 
     public virtual UserLogin User { get; set; } = null!;
 }

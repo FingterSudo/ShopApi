@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\shopapi\\ShopApi.csproj": {}
+    "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\ShopApi\\ShopApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\shopapi\\ShopApi.csproj": {
+    "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\ShopApi\\ShopApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\shopapi\\ShopApi.csproj",
+        "projectUniqueName": "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\ShopApi\\ShopApi.csproj",
         "projectName": "ShopApi",
-        "projectPath": "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\shopapi\\ShopApi.csproj",
+        "projectPath": "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\ShopApi\\ShopApi.csproj",
         "packagesPath": "C:\\Users\\An Viet Computer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\shopapi\\obj\\",
+        "outputPath": "C:\\Users\\An Viet Computer\\Desktop\\ShopApi\\ShopApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\An Viet Computer\\AppData\\Roaming\\NuGet\\NuGet.Config",

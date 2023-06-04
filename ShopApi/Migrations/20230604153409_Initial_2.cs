@@ -55,7 +55,7 @@ namespace ShopApi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    Roels = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true)
+                    Roles = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {

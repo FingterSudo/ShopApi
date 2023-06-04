@@ -162,7 +162,7 @@ public partial class ShopDatabaseContext : DbContext
 
             entity.HasIndex(e => e.UserId, "IndexUserRolesUserId");
 
-            entity.Property(e => e.Roels)
+            entity.Property(e => e.Roles)
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
